@@ -1,11 +1,10 @@
 const router = require("express").Router();
 const { WorldsApi } = require("../vrcApi");
 
+//gets world data from vrc api from keyword
 router.post("/", async (req, res) => {
-
   const search = req.body.text;
 
-  //request to VRC API SearchWorld
   WorldsApi.searchWorlds(
     false,
     "popularity",
@@ -20,6 +19,7 @@ router.post("/", async (req, res) => {
   });
 });
 
+//gets world info from VRC API by world id
 router.get("/:worldId", async (req, res) => {
   const worldId = req.params.worldId;
   WorldsApi.getWorld(worldId).then((response) => {

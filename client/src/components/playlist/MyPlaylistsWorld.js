@@ -9,9 +9,11 @@ const MyPlaylistsWorld = (props) => {
   const [worldAuthor, setWorldAuthor] = useState("");
   const [popupWorldInfo, setPopupWorldInfo] = useState(false);
 
+  // on page load: get world info from backend
   useEffect(() => {
     const fetchData = () => {
-      axios.get(`/api/getWorld/${props.worldId}`)
+      axios
+        .get(`/api/getWorld/${props.worldId}`)
         .then((response) => {
           setWorldTitle(response.data.name);
           setWorldImage(response.data.thumbnailImageUrl);
@@ -19,7 +21,7 @@ const MyPlaylistsWorld = (props) => {
           setWorldAuthor(response.data.authorName);
         })
         .catch((error) => {
-          console.log("error:", error)
+          console.log("error:", error);
         });
     };
     fetchData();

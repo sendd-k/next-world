@@ -17,8 +17,10 @@ export default function MyFavouritesItem({
   const playlistUrl = `/playlist/${playlistId}`;
   const token = Cookies.get("jwt");
 
+  // GET request to get the playlist title and worldIds on load
   useEffect(() => {
-    axios.get(`/api/favourites/user/${playlistId}`)
+    axios
+      .get(`/api/favourites/user/${playlistId}`)
       .then((response) => {
         setTitle(response.data[0].title);
         setWorldIds(response.data[0].worldIds);
@@ -37,16 +39,18 @@ export default function MyFavouritesItem({
     //if confirm equals true, send DELETE request to backend
 
     if (confirm) {
-      await axios.delete(`/api/favourites/delete/${token}/${playlistId}`)
+      await axios
+        .delete(`/api/favourites/delete/${token}/${playlistId}`)
         .then((response) => {
           handleRemoveFavourite(true);
         })
         .catch((error) => {
-          console.log("error:", error)
+          console.log("error:", error);
         });
     }
   };
 
+  //maps worlds so they can be displayed in the playlist
   const mappedPlaysWorlds = worldIds.map((world, index) => {
     //generate a unique key for child - worldID alone breaks if two of same world
     let key = world.concat(index);

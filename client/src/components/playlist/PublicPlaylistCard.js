@@ -11,29 +11,32 @@ export default function PublicPlaylistCard(props) {
   // console.log("props PPC: ", props);
   useEffect(() => {
     const fetchData = () => {
-      axios.get(`/api/user/home/${props.authorId}`)
+      axios
+        .get(`/api/user/home/${props.authorId}`)
         .then((response) => {
           setAuthor([response.data.username]);
         })
         .catch((error) => {
           console.log((error) => {
-            console.log("error:", error)
-          })
+            console.log("error:", error);
+          });
         });
     };
 
     fetchData();
   }, []);
 
+  //on page load: get playlist favourite info from backend
   useEffect(() => {
     const fetchData = () => {
-      axios.get(`/api/favourites/count/${props.playlistId}`)
+      axios
+        .get(`/api/favourites/count/${props.playlistId}`)
         .then((response) => {
           const favouritesCount = response.data.length;
           setFavourites(favouritesCount);
         })
         .catch((error) => {
-          console.log("error:", error)
+          console.log("error:", error);
         });
     };
     fetchData();

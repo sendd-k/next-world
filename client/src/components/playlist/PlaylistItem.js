@@ -14,6 +14,7 @@ export default function PlaylistItem({ edit, worldId, deleteWorldRefresh }) {
 
   const params = useParams();
 
+  // on page load: get world info from backend
   useEffect(() => {
     axios
       .get(`/api/getWorld/${worldId}`)
@@ -24,7 +25,7 @@ export default function PlaylistItem({ edit, worldId, deleteWorldRefresh }) {
         setDescription(response.data.description);
       })
       .catch((error) => {
-        console.log("error:", error)
+        console.log("error:", error);
       });
   }, []);
 
@@ -47,7 +48,7 @@ export default function PlaylistItem({ edit, worldId, deleteWorldRefresh }) {
           }
         })
         .catch((error) => {
-          console.log("error:", error)
+          console.log("error:", error);
         });
     }
   };

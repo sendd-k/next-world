@@ -15,9 +15,11 @@ function Login({ checkLogin }) {
   const [user, setUser] = useState(false);
   const navigate = useNavigate();
 
+  //login in user and set user to true
   const submit = (event) => {
     event.preventDefault();
-    axios.post(
+    axios
+      .post(
         "/api/user/login",
         {
           username: username,
@@ -37,7 +39,7 @@ function Login({ checkLogin }) {
         }
       })
       .catch((error) => {
-        console.log("error:", error)
+        console.log("error:", error);
       });
   };
 

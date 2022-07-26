@@ -1,6 +1,8 @@
 const router = require("express").Router();
 const jwt = require("jsonwebtoken");
 const User = require("../Schema/users-schema");
+
+//posts new user to database
 router.post("/", async (req, res) => {
   const username = req.body.username;
   const password = req.body.password;

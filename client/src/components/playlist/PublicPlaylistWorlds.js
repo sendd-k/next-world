@@ -9,6 +9,7 @@ const PublicPlaylistWorlds = (props) => {
   const [worldAuthor, setWorldAuthor] = useState("");
   const [popupWorldInfo, setPopupWorldInfo] = useState(false);
 
+  // on page load: get world info from backend
   useEffect(() => {
     const fetchData = async () => {
       await axios

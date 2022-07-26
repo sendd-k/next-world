@@ -3,6 +3,7 @@ const jwt = require("jsonwebtoken");
 const Favourites = require("../schema/favourites-schema");
 const Playlist = require("../Schema/playlists-schema");
 
+// route to add a playlist to user's favourites
 router.post("/:token/:playlist_id", async (req, res) => {
   const token = req.params.token;
   const playlist_id = req.params.playlist_id;
@@ -38,6 +39,7 @@ router.get("/user/:playlist_id", async (req, res) => {
   } catch (error) {}
 });
 
+// route to delete a playlist from user's favourites
 router.delete("/delete/:token/:playlist_id", async (req, res) => {
   const playlist_id = req.params.playlist_id;
   const token = req.params.token;
@@ -49,6 +51,7 @@ router.delete("/delete/:token/:playlist_id", async (req, res) => {
   } catch (error) {}
 });
 
+// counts the number of favourites for a playlist
 router.get("/count/:playlist_id", async (req, res) => {
   try {
     const playlist_id = req.params.playlist_id;
@@ -59,6 +62,7 @@ router.get("/count/:playlist_id", async (req, res) => {
   }
 });
 
+//authenticates playlist owner
 router.get("/check/:token/:playlist_id", async (req, res) => {
   const token = req.params.token;
   const playlist_id = req.params.playlist_id;

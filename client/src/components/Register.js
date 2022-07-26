@@ -10,6 +10,8 @@ function Register() {
   const [password, setPassword] = useState("");
   const [popupRegisterSuccess, setPopupRegisterSuccess] = useState(false);
   const redirectUrl = "/user";
+
+  //register in user and set user to true
   const submit = async (event) => {
     event.preventDefault();
     const response = await axios.post(

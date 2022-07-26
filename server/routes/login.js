@@ -2,6 +2,8 @@ const router = require("express").Router();
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const User = require("../Schema/users-schema");
+
+// validates login credentials
 router.post("/", async (req, res, next) => {
   const username = req.body.username;
   const password = req.body.password;

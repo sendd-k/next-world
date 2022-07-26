@@ -2,6 +2,7 @@ const router = require("express").Router();
 const Playlist = require("../Schema/playlists-schema");
 const jwt = require("jsonwebtoken");
 
+// route to create a new playlist
 router.post("/", async (req, res) => {
   const title = req.body.title;
   const description = req.body.description;
@@ -18,7 +19,7 @@ router.post("/", async (req, res) => {
       worlds: [],
       user_id: decoded._id,
     });
-    res.json(playlist._id)
+    res.json(playlist._id);
   } catch (err) {
     res.json({ status: "error", message: err });
   }

@@ -14,22 +14,27 @@ export default function MyPlaylistsItem({ playlistId, handleDeleteRefresh }) {
   const [worldIds, setWorldIds] = useState([]);
   const playlistUrl = `/playlist/${playlistId}`;
 
+  // GET request to get the playlist title and worldIds on load
   useEffect(() => {
-    axios.get(`/api/playlist/${playlistId}`)
-    .then((response) => {
-      setTitle(response.data.title);
-      setWorldIds(response.data.worldIds);
-    }).catch((error) => {
-      console.log("error:", error)
-    });
+    axios
+      .get(`/api/playlist/${playlistId}`)
+      .then((response) => {
+        setTitle(response.data.title);
+        setWorldIds(response.data.worldIds);
+      })
+      .catch((error) => {
+        console.log("error:", error);
+      });
   }, []);
 
+  // pop up a confirmation then delete if confirmed by user
   const deletePlaylist = () => {
     let confirm = window.confirm(
       "Are you sure you want to delete this playlist?"
     );
     if (confirm === true) {
-      axios.delete(`/api/playlist/delete`, {
+      axios
+        .delete(`/api/playlist/delete`, {
           data: { _id: playlistId },
         })
         .then((response) => {
@@ -45,6 +50,7 @@ export default function MyPlaylistsItem({ playlistId, handleDeleteRefresh }) {
     }
   };
 
+  //maps worlds so they can be displayed in the playlist
   const mappedPlaysWorlds = worldIds.map((world, index) => {
     //generate a unique key for child - worldID alone breaks if two of same world
     let key = world.concat(index);
@@ -76,10 +82,7 @@ export default function MyPlaylistsItem({ playlistId, handleDeleteRefresh }) {
       <BasicPopup trigger={popupDeleted} setTrigger={setPopupDeleted}>
         <h1>Playlist Deleted</h1>
       </BasicPopup>
-      <ConfirmPopup
-        trigger={confirmPopup}
-        setTrigger={setConfirmPopup}
-      >
+      <ConfirmPopup trigger={confirmPopup} setTrigger={setConfirmPopup}>
         <h1>Delete This Playlist?</h1>
       </ConfirmPopup>
     </div>

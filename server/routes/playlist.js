@@ -3,6 +3,7 @@ const jwt = require("jsonwebtoken");
 const Playlist = require("../Schema/playlists-schema");
 const User = require("../Schema/users-schema");
 
+// returns playlist info by playlist id
 router.get("/:playlistId", async (req, res) => {
   let playlistId = req.params.playlistId;
 
@@ -14,6 +15,7 @@ router.get("/:playlistId", async (req, res) => {
   return res.json(playlist);
 });
 
+// returns all playlists for a user
 router.get("/auth/:token", async (req, res) => {
   try {
     let token = req.params.token;
@@ -23,6 +25,7 @@ router.get("/auth/:token", async (req, res) => {
   } catch (error) {}
 });
 
+// posts new world to playlist
 router.post("/addworld", async (req, res) => {
   try {
     const worldId = req.body.worldId;
@@ -41,6 +44,7 @@ router.post("/addworld", async (req, res) => {
   }
 });
 
+// posts edits to playlist
 router.post("/edit", async (req, res) => {
   const title = req.body.title;
   const description = req.body.description;
@@ -59,6 +63,7 @@ router.post("/edit", async (req, res) => {
   }
 });
 
+// deletes playlist
 router.delete("/delete", async (req, res) => {
   try {
     const playlistId = req.body._id;
@@ -69,6 +74,7 @@ router.delete("/delete", async (req, res) => {
   }
 });
 
+// deletes world from playlist
 router.delete("/deleteworld", async (req, res) => {
   const worldId = req.body.worldId;
   const playlistId = req.body.playlistId;
@@ -84,6 +90,7 @@ router.delete("/deleteworld", async (req, res) => {
   res.json("deleted world");
 });
 
+// shows edit button if user is owner of playlist
 router.get("/auth/:user_id/:playlist_id", async (req, res) => {
   try {
     const token = req.params.user_id;

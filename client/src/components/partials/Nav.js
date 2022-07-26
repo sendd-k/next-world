@@ -10,10 +10,13 @@ function Nav({ userToken }) {
   const cookie = Cookies.get();
   const navigate = useNavigate();
 
+  // on page load:
   useEffect(() => {
+    //Checks cookie for login
     if (cookie.jwt) {
       setUser(true);
     }
+    //Checks if user is logged in
     if (userToken === {}) {
       setUser(true);
     }

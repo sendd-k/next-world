@@ -37,11 +37,14 @@ function World(props) {
         .then((response) => {
           setPlaylists(response.data.playlists);
         })
-        .catch((error) => {console.log("error:", error)});
+        .catch((error) => {
+          console.log("error:", error);
+        });
     };
     fetchData();
   }, []);
 
+  //Adds a world to a playlist
   const submit = (event) => {
     event.preventDefault();
     axios
@@ -65,6 +68,7 @@ function World(props) {
       });
   };
 
+  //Fetches data for world card/displays world card
   const showWorldInfo = () => {
     function fetchData() {
       axios
@@ -73,18 +77,25 @@ function World(props) {
           setPopupWorldInfo(true);
           setDescription(response.data.description);
         })
-        .catch((error) => {console.log("error:", error)});
+        .catch((error) => {
+          console.log("error:", error);
+        });
     }
     fetchData();
   };
 
+  //Shows add to playlist card
   const addSearch = () => {
     setPopupAdded(true);
   };
   return (
     <div className="playlist-world-item-container">
       <div className="playlist-world-wrapper" onClick={showWorldInfo}>
-        <img className="playlist-world-item-img" src={props.image} alt={props.title}/>
+        <img
+          className="playlist-world-item-img"
+          src={props.image}
+          alt={props.title}
+        />
 
         <h3 className="playlist-world-item-title">{props.title}</h3>
       </div>

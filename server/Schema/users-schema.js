@@ -17,6 +17,7 @@ const User = mongoose.Schema({
   },
 });
 
+//before saving user, hash password
 User.pre("save", async function (next) {
   try {
     const salt = await bcrypt.genSalt(10);

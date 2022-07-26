@@ -24,16 +24,17 @@ function UserDashboard(props) {
 
   // on page load:
   useEffect(() => {
-    const fetchData =   () => {
+    const fetchData = () => {
       // GET request to user/:token returns the user and user's playlists
-      axios.get(`/api/user/${token}`, {
+      axios
+        .get(`/api/user/${token}`, {
           withCredentials: true,
         })
         .then((response) => {
           setUsername(response.data.username);
         })
         .catch((error) => {
-          console.log("error:", error)
+          console.log("error:", error);
         });
     };
     fetchData();
@@ -42,14 +43,15 @@ function UserDashboard(props) {
   useEffect(() => {
     const fetchData = () => {
       // GET request to user/:token returns the user and user's playlists
-      axios.get(`/api/user/${token}`, {
+      axios
+        .get(`/api/user/${token}`, {
           withCredentials: true,
         })
         .then((response) => {
           setPlaylists(response.data.playlists);
         })
         .catch((error) => {
-          console.log("error:", error)
+          console.log("error:", error);
         });
     };
     fetchData();
@@ -59,19 +61,21 @@ function UserDashboard(props) {
   useEffect(() => {
     const fetchData = () => {
       // GET request to favourites/:token returns all favourite playlists for that user
-      axios.get(`/api/favourites/${token}`, {
+      axios
+        .get(`/api/favourites/${token}`, {
           withCredentials: true,
         })
         .then((response) => {
           setFavourites(response.data);
         })
         .catch((error) => {
-          console.log("error", error)
+          console.log("error", error);
         });
     };
     fetchData();
   }, [triggerFavouriteRefresh]);
 
+  //Uses state from MyFavouritesItem to trigger a popup
   const handleRemoveFavourite = (event) => {
     setTriggerFavouriteRefresh(event);
     setTriggerFavouritePopup(event);
@@ -80,6 +84,7 @@ function UserDashboard(props) {
     }, 100);
   };
 
+  //Uses state from MyPlaylistsItem to trigger a popup
   const handleDeleteRefresh = (event) => {
     setTriggerDeleteRefresh(event);
     setTriggerDeletePopup(event);
@@ -88,6 +93,7 @@ function UserDashboard(props) {
     }, 100);
   };
 
+  //Maps favourites into MyFavouritesItem components
   const mappedFavourites = favourites.map((favourite) => {
     return (
       <MyFavouritesItem
@@ -98,6 +104,7 @@ function UserDashboard(props) {
     );
   });
 
+  //Maps playlists into MyPlaylistsItem components
   const mappedPlaylists = playlists.map((playlist) => {
     return (
       <MyPlaylistsItem
